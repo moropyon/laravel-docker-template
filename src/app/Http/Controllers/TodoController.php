@@ -13,7 +13,7 @@ class TodoController extends Controller
     {
         $this->todo = $todo;
     }
-    
+
     public function index()
     {
         $todoList = $this->todo->all();
@@ -38,5 +38,11 @@ class TodoController extends Controller
     public function show($id) {
         $todo = $this->todo->find($id);
         return view('todo.show', ['todo' => $todo]);
+    }
+
+    public function edit($id) //穴埋め箇所
+    {
+        $todo =$this->todo->find($id);
+        return view('todo.edit', ['todo' => $todo]);
     }
 }
