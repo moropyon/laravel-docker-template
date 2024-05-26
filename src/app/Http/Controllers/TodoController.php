@@ -7,11 +7,16 @@ use App\Todo;
 
 class TodoController extends Controller
 {
+    private $todo;
+
+    public function __construct(Todo $todo)
+    {
+        $this->todo = $todo;
+    }
+    
     public function index()
     {
-        $todo = new Todo();
-        $todoList = $todo->all();
-
+        $todoList = $this->todo->all();
         return view('todo.index', ['todoList' => $todoList]);
     }
 
@@ -24,17 +29,14 @@ class TodoController extends Controller
     {
         $inputs = $request->all();
 
-        $todo = new Todo();
-        $todo->fill($inputs);
-        $todo->save();
+        $this->todo->fill($inputs);
+        $this->todo->save();
 
         return redirect()->route('todo.index');
     }
 
     public function show($id) {
-        $todo = new Todo();
-        $targetTodo = $todo->find($id);
-        
-        return view('todo.show', ['todo' => $targetTodo]);
+        $todo = $this->todo->find($id);
+        return view('todo.show', ['todo' => $todo]);
     }
 }
