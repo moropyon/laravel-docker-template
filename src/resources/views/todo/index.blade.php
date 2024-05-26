@@ -13,7 +13,7 @@
           @foreach ($todoList as $todo) <!-- $todosじゃなくね -->
             <div class="d-flex align-items-center p-2">
               <span class="col-9">{{ $todo->content }}</span>
-              <a href="{{ route('todo.show'}}" class="btn btn-info ml-3">詳細</a>
+              <a href="{{ route('todo.show', ['id' => $todo->id]) }}" class="btn btn-info ml-3">詳細</a> {{-- route修正 --}}
             </div>
           @endforeach
         </div>

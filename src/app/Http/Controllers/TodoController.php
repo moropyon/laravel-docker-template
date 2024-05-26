@@ -42,7 +42,15 @@ class TodoController extends Controller
 
     public function edit($id) //穴埋め箇所
     {
-        $todo =$this->todo->find($id);
+        $todo = $this->todo->find($id);
         return view('todo.edit', ['todo' => $todo]);
+    }
+
+    public function update(Request $request, $id) // 穴埋め箇所
+    {
+        $inputs = $request->all();
+        $todo = $this->todo->find($id);
+        $todo->fill($inputs)->save();
+        return redirect()->route('todo.show', $todo->id);
     }
 }
